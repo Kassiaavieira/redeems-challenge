@@ -38,7 +38,7 @@ export default function Step4Success() {
           color: 'text.primary', 
         }}
       >
-        Presente resgatado! 🥳
+        Presente resgatado!🎉🥳
       </Typography>
 
       <Typography 

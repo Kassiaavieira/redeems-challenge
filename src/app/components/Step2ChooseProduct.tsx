@@ -13,20 +13,17 @@ type Props = {
 };
 
 export default function Step2ChooseProduct({ products, onNext, onBack, onSelect }: Props) {
-  const [selectedPageId, setSelectedPageId] = useState<string | null>(null);
+  const [selectedProductId, setSelectedProductId] = useState<string | null>(null);
 
   const selectProduct = (product: RedeemItem & { redeem_page_id: string }) => {
-    const newPageId = product.redeem_page_id;
-    const isSelected = selectedPageId === newPageId;
-    
-    const newSelectedPageId = isSelected ? null : newPageId;
-    setSelectedPageId(newSelectedPageId);
+    const isSelected = selectedProductId === product.customer_product_id;
+    const newSelectedProductId = isSelected ? null : product.customer_product_id;
+    setSelectedProductId(newSelectedProductId);
 
-    if (newSelectedPageId) {
-        onSelect(product.customer_product_id, newPageId);
-    } else {
-        onSelect(null, null);
-    }
+    onSelect(
+      newSelectedProductId ? product.customer_product_id : null,
+      newSelectedProductId ? product.redeem_page_id : null
+    );
   };
 
   return (
@@ -41,7 +38,7 @@ export default function Step2ChooseProduct({ products, onNext, onBack, onSelect 
             <Card
               sx={{
                 position: 'relative',
-                border: selectedPageId === product.redeem_page_id ? '2px solid blue' : '1px solid gray',
+                border: selectedProductId === product.customer_product_id ? '2px solid blue' : '1px solid gray',
                 cursor: 'pointer',
               }}
               onClick={() => selectProduct(product)}
@@ -77,8 +74,8 @@ export default function Step2ChooseProduct({ products, onNext, onBack, onSelect 
                     height: 20,
                     borderRadius: '50%',
                     border: '2px solid',
-                    borderColor: selectedPageId === product.redeem_page_id ? 'blue' : 'grey.400',
-                    backgroundColor: selectedPageId === product.redeem_page_id ? 'blue' : 'transparent',
+                    borderColor: selectedProductId === product.customer_product_id ? 'blue' : 'grey.400',
+                    backgroundColor: selectedProductId === product.customer_product_id ? 'blue' : 'transparent',
                   }}
                 />
               </CardContent>
@@ -113,7 +110,7 @@ export default function Step2ChooseProduct({ products, onNext, onBack, onSelect 
             fontFamily: '"Roboto", sans-serif',
             fontWeight: 'bold',
           }}
-          disabled={!selectedPageId}
+          disabled={!selectedProductId}
         >
           Continuar
         </Button>
