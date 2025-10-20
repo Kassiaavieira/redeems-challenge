@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import { RedeemFormData, CustomerProductsResponse } from '../types';
+import { RedeemFormData, RedeemPage, RedeemPagesResponse } from '../types';
 
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE;
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
@@ -14,11 +14,11 @@ export const api = axios.create({
   },
 });
 
-export const approveRedeem = (id: string, data: RedeemFormData): Promise<AxiosResponse<void>> =>
-  api.post(`api/v1/redeems/${id}/approve`, data);
+export const createRedeem = (redeemPageId: string, data: RedeemFormData): Promise<AxiosResponse<void>> =>
+  api.post(`/api/v1/redeem_pages/${redeemPageId}/redeem`, data);
 
-export const refuseRedeem = (id: string, data: RedeemFormData): Promise<AxiosResponse<void>> =>
-  api.post(`api/v1/redeems/${id}/refuse`, data);
+export const getRedeemPages = (): Promise<AxiosResponse<RedeemPagesResponse>> =>
+  api.get('/api/v1/redeem_pages');
 
-export const getCustomerProducts = (): Promise<AxiosResponse<CustomerProductsResponse>> =>
-  api.get('api/v1/customer_products');
+export const getRedeemPageById = (redeemPageId: string): Promise<AxiosResponse<RedeemPage>> =>
+  api.get(`/api/v1/redeem_pages/${redeemPageId}`);
