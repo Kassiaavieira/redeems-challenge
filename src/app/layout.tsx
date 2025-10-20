@@ -1,26 +1,39 @@
-import './globals.css'
-import { ReactNode } from 'react'
-import { CssBaseline, ThemeProvider, createTheme } from '@mui/material'
-import Header from '../components/Header'
+'use client'
+import { ReactNode } from 'react';
+import { CssBaseline, ThemeProvider, createTheme, Container } from '@mui/material';
+
+type Props = {
+  children: ReactNode;
+};
 
 const theme = createTheme({
   palette: {
-    primary: { main: '#4B2BD3' },
-    secondary: { main: '#00C2A8' }
+    primary: {
+      main: '#22007F',
+    },
+    secondary: {
+      main: '#f50057',
+    },
   },
-  shape: { borderRadius: 12 }
-})
+  typography: {
+    fontFamily: 'Roboto, Arial, sans-serif',
+  },
+});
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default function RootLayout({ children }: Props) {
   return (
     <html lang="pt-BR">
+      <head>
+        <title>Redeems Challenge</title>
+      </head>
       <body>
         <ThemeProvider theme={theme}>
           <CssBaseline />
-          <Header />
-          <main style={{ padding: '40px 24px' }}>{children}</main>
+          <Container maxWidth="md" sx={{ py: 4 }}>
+            {children}
+          </Container>
         </ThemeProvider>
       </body>
     </html>
-  )
+  );
 }
