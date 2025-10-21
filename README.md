@@ -2,6 +2,12 @@
 
 Este é um projeto [Next.js](https://nextjs.org) criado com [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Deploy no Vercel
+
+```
+https://redeems-challenge.vercel.app
+```
+
 ## Funcionalidades
 
 - Desenvolvido totalmente com [Next.js](https://nextjs.org)
